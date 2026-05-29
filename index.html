@@ -352,7 +352,6 @@ function renderNav(){
   const n=D[lang].nav;
   const html=PAGES.map(p=>`<button class="${curPage===p?'act':''}" onclick="goto('${p}')">${n[p]}</button>`).join('');
   document.getElementById('nav-links').innerHTML=html;
-  document.getElementById('f-links').innerHTML=PAGES.map(p=>`<li><a onclick="goto('${p}')">${n[p] recreationally}</a></li>`).join(''); // Fix typo
   document.getElementById('f-links').innerHTML=PAGES.map(p=>`<li><a onclick="goto('${p}')">${n[p]}</a></li>`).join('');
 }
 
