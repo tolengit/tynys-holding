@@ -384,8 +384,106 @@ function renderPage(p){
   const el=document.getElementById('p-'+p);
   if(p==='home') renderHome(el);
   else if(p==='about') renderAbout(el);
+  else if(p==='services') renderServices(el);
+  else if(p==='projects') renderProjects(el);
+  else if(p==='team') renderTeam(el);
+  else if(p==='news') renderNews(el);
+  else if(p==='career') renderCareer(el);
   else if(p==='contact') renderContact(el);
-  else el.innerHTML=`<div class="container section"><span class="s-label">Tynys-Holding</span><h2 class="s-title">${D[lang].nav[p]}</h2><p class="s-desc">Раздел находится в разработке.</p></div>`;
+}
+
+function renderServices(el){
+  const d=D[lang];
+  el.innerHTML=`
+<div class="section container">
+  <div class="section-header">
+    <span class="s-label">${d.nav.services}</span>
+    <h2 class="s-title">${d.home.sTitle}</h2>
+  </div>
+  <div class="grid-3">
+    ${d.home.sv.map(s=>`<div class="card service-card"><div class="n">${s.n}</div><h3>${s.h}</h3><p>${s.p}</p></div>`).join('')}
+  </div>
+</div>`;
+}
+
+function renderProjects(el){
+  const d=D[lang].projects;
+  el.innerHTML=`
+<div class="section container">
+  <div class="section-header">
+    <span class="s-label">${d.lbl}</span>
+    <h2 class="s-title">${d.h}</h2>
+    <p class="s-desc">${d.sub}</p>
+  </div>
+  <div class="grid-2">
+    ${d.items.map(p=>`
+      <div class="card project-card">
+        <div class="p-meta"><span class="p-badge p-badge-acc">${p.t}</span><span class="p-badge">${p.r}</span></div>
+        <h3>${p.h}</h3>
+        <p class="s-desc" style="font-size:14px;">${p.p}</p>
+      </div>
+    `).join('')}
+  </div>
+</div>`;
+}
+
+function renderTeam(el){
+  const d=D[lang].team;
+  el.innerHTML=`
+<div class="section container">
+  <div class="section-header">
+    <span class="s-label">${d.lbl}</span>
+    <h2 class="s-title">${d.h}</h2>
+    <p class="s-desc">${d.sub}</p>
+  </div>
+  <div class="grid-2">
+    ${d.members.map(m=>`
+      <div class="card" style="padding:40px;">
+        <h4 style="font-size:20px; font-weight:800; color:var(--primary); margin-bottom:4px;">${m.n}</h4>
+        <div class="p-badge" style="display:inline-block; margin-bottom:16px;">${m.r}</div>
+        <p class="s-desc" style="font-size:14px;">${m.p}</p>
+      </div>
+    `).join('')}
+  </div>
+</div>`;
+}
+
+function renderNews(el){
+  const d=D[lang].news;
+  el.innerHTML=`
+<div class="section container">
+  <div class="section-header">
+    <span class="s-label">${d.lbl}</span>
+    <h2 class="s-title">${d.h}</h2>
+    <p class="s-desc">${d.sub}</p>
+  </div>
+  <div class="grid-2">
+    ${d.items.map(n=>`
+      <div class="card" style="padding:40px;">
+        <div style="font-size:12px; font-weight:800; color:var(--accent); margin-bottom:12px;">${n.d}</div>
+        <h3 style="font-size:18px; font-weight:800; margin-bottom:16px;">${n.h}</h3>
+        <p class="s-desc" style="font-size:14px;">${n.p}</p>
+      </div>
+    `).join('')}
+  </div>
+</div>`;
+}
+
+function renderCareer(el){
+  const d=D[lang];
+  el.innerHTML=`
+<div class="section container">
+  <div class="section-header">
+    <span class="s-label">${d.nav.career}</span>
+    <h2 class="s-title">Работа в Tynys-Holding</h2>
+    <p class="s-desc">Мы всегда в поиске талантливых инженеров и специалистов.</p>
+  </div>
+  <div class="card" style="background:var(--primary); color:var(--white); text-align:center;">
+    <h3 style="font-size:24px; margin-bottom:24px; color:var(--accent);">Открытые вакансии</h3>
+    <p style="margin-bottom:32px; opacity:0.8;">На данный момент мы формируем кадровый резерв. Отправьте ваше резюме на почту.</p>
+    <button class="btn btn-primary" style="background:var(--white); color:var(--primary);" onclick="goto('contact')">Отправить резюме</button>
+  </div>
+</div>`;
 }
 
 function renderHome(el){
