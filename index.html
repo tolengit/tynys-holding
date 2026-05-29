@@ -90,8 +90,8 @@ header {
 }
 .hero::before {
   content: ''; position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1579362391583-f3680962779a?auto=format&fit=crop&q=80&w=2000');
-  background-size: cover; background-position: center; opacity: 0.15; z-index: 1;
+  background-image: url('https://images.unsplash.com/photo-1578319439584-104c94d37305?auto=format&fit=crop&q=80&w=2000'); /* Professional Mining/Excavator */
+  background-size: cover; background-position: center; opacity: 0.1; z-index: 1;
 }
 .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 60px; position: relative; z-index: 2; }
 .hero-content { position: relative; z-index: 2; }
@@ -121,7 +121,7 @@ header {
   width: 100%; height: 100%; background: var(--bg); border-radius: 20px;
   position: relative; overflow: hidden; box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
-  background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1200');
+  background-image: url('https://images.unsplash.com/photo-1579970481966-bc904f69f91a?auto=format&fit=crop&q=80&w=1200'); /* Industrial Pipeline/Factory */
   background-size: cover; background-position: center;
 }
 .h-stats-float {
@@ -440,6 +440,7 @@ function renderServices(el){
   const d=D[lang];
   el.innerHTML=`
 <div class="section container">
+  <div style="width:100%; height:300px; background-image:url('https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=1600'); background-size:cover; background-position:center; border-radius:16px; margin-bottom:60px; box-shadow:var(--shadow);"></div>
   <div class="section-header">
     <span class="s-label">${d.nav.services}</span>
     <h2 class="s-title">${d.home.sTitle}</h2>
@@ -454,6 +455,7 @@ function renderProjects(el){
   const d=D[lang].projects;
   el.innerHTML=`
 <div class="section container">
+  <div style="width:100%; height:300px; background-image:url('https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&q=80&w=1600'); background-size:cover; background-position:center; border-radius:16px; margin-bottom:60px; box-shadow:var(--shadow);"></div>
   <div class="section-header">
     <span class="s-label">${d.lbl}</span>
     <h2 class="s-title">${d.h}</h2>
@@ -475,6 +477,7 @@ function renderTeam(el){
   const d=D[lang].team;
   el.innerHTML=`
 <div class="section container">
+  <div style="width:100%; height:300px; background-image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1600'); background-size:cover; background-position:center; border-radius:16px; margin-bottom:60px; box-shadow:var(--shadow);"></div>
   <div class="section-header">
     <span class="s-label">${d.lbl}</span>
     <h2 class="s-title">${d.h}</h2>
