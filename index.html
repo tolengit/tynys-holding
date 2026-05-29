@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="kk">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,7 +49,7 @@ a { text-decoration: none; color: inherit; transition: var(--transition); }
 /* ─── HEADER ─── */
 header {
   position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-  background: rgba(252, 250, 247, 0.85); backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,0,0,0.05); height: 80px;
   display: flex; align-items: center;
 }
@@ -61,14 +61,27 @@ header {
   padding: 8px 16px; font-size: 13px; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.05em; color: var(--text-light); border-radius: 6px;
 }
-.nav-links button:hover, .nav-links button.act { color: var(--primary); background: rgba(10,50,33,0.05); }
+.nav-links button:hover, .nav-links button.act { color: var(--primary); background: rgba(46, 204, 113, 0.05); }
 
 .nav-r { display: flex; align-items: center; gap: 20px; }
 .lang-switch { display: flex; gap: 2px; background: rgba(0,0,0,0.03); padding: 3px; border-radius: 8px; }
 .lang-switch button { padding: 6px 12px; font-size: 11px; font-weight: 800; border-radius: 6px; color: var(--text-light); }
 .lang-switch button.act { background: var(--white); color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
 
-.menu-toggle { display: none; font-size: 24px; color: var(--primary); }
+.menu-toggle { display: none; font-size: 28px; color: var(--primary); z-index: 1100; position: relative; width: 40px; height: 40px; flex-direction: column; justify-content: center; gap: 6px; padding: 5px; }
+.menu-toggle span { width: 100%; height: 2px; background: currentColor; transition: var(--transition); }
+.menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ─── MOBILE NAV ─── */
+.mobile-nav { 
+  position: fixed; inset: 0; background: var(--white); z-index: 1050; 
+  display: flex; flex-direction: column; padding: 120px 40px; gap: 24px;
+  transform: translateX(100%); transition: var(--transition);
+}
+.mobile-nav.open { transform: translateX(0); }
+.mobile-nav button { font-size: 24px; font-weight: 800; text-align: left; color: var(--primary); }
 
 /* ─── HERO ─── */
 .hero {
@@ -79,33 +92,34 @@ header {
 .hero-content { position: relative; z-index: 2; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 800;
-  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 24px;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--secondary); margin-bottom: 24px;
 }
 .hero h1 {
-  font-family: 'Bebas Neue', sans-serif; font-size: clamp(64px, 12vw, 120px);
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 10vw, 120px);
   line-height: 0.85; color: var(--primary); margin-bottom: 24px;
 }
-.hero h1 span { color: var(--secondary); display: block; }
-.hero p { font-size: 18px; color: var(--text-light); margin-bottom: 48px; max-width: 580px; font-weight: 400; }
+.hero h1 span { color: var(--accent); display: block; }
+.hero p { font-size: 18px; color: var(--text-light); margin-bottom: 40px; max-width: 580px; font-weight: 400; }
 
 .btn { 
   display: inline-flex; align-items: center; justify-content: center;
   padding: 18px 36px; border-radius: 8px; font-size: 14px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.05em; transition: var(--transition);
 }
-.btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 4px 14px rgba(10,50,33,0.25); }
-.btn-primary:hover { background: var(--primary-l); transform: translateY(-2px); }
+.btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 4px 14px rgba(46, 204, 113, 0.25); }
+.btn-primary:hover { background: var(--primary-d); transform: translateY(-2px); }
 .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
 .btn-outline:hover { background: var(--primary); color: var(--white); }
 
 .hero-visual { position: relative; height: 500px; }
 .hero-img-box {
-  width: 100%; height: 100%; background: var(--primary); border-radius: 20px;
+  width: 100%; height: 100%; background: var(--bg); border-radius: 20px;
   position: relative; overflow: hidden; box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
 }
 .hero-img-box::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(45deg, rgba(10,50,33,0.4), transparent);
+  content: 'TYNYS'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue'; font-size: 120px; color: rgba(46, 204, 113, 0.03); letter-spacing: 10px;
 }
 .h-stats-float {
   position: absolute; left: -40px; bottom: 40px; background: var(--white);
@@ -125,17 +139,17 @@ header {
   color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.15em;
   display: flex; align-items: center; gap: 20px;
 }
-.ticker-item::after { content: '◆'; color: var(--accent); font-size: 10px; }
+.ticker-item::after { content: '◆'; color: var(--secondary); font-size: 10px; }
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ─── HEADINGS ─── */
 .section-header { margin-bottom: 60px; max-width: 800px; }
 .s-label {
-  font-size: 12px; font-weight: 800; color: var(--accent); text-transform: uppercase;
+  font-size: 12px; font-weight: 800; color: var(--secondary); text-transform: uppercase;
   letter-spacing: 0.25em; display: block; margin-bottom: 16px;
 }
 .s-title {
-  font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 8vw, 72px);
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 8vw, 72px);
   color: var(--primary); line-height: 0.95; margin-bottom: 24px;
 }
 .s-desc { font-size: 18px; color: var(--text-light); font-weight: 400; }
@@ -146,7 +160,7 @@ header {
 
 /* ─── CARDS ─── */
 .card {
-  background: var(--card-bg); border: 1px solid var(--border); padding: 48px;
+  background: var(--card-bg); border: 1px solid var(--border); padding: 40px;
   border-radius: 12px; transition: var(--transition); position: relative;
   overflow: hidden;
 }
@@ -157,9 +171,9 @@ header {
 }
 .card:hover::before { height: 100%; }
 
-.service-card .n { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(10,50,33,0.1); line-height: 1; margin-bottom: 20px; }
-.service-card h3 { font-size: 22px; font-weight: 800; color: var(--primary); margin-bottom: 16px; }
-.service-card p { font-size: 15px; color: var(--text-light); }
+.service-card .n { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: rgba(46, 204, 113, 0.05); line-height: 1; margin-bottom: 20px; }
+.service-card h3 { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 16px; }
+.service-card p { font-size: 14px; color: var(--text-light); }
 
 .project-card { padding: 40px; border-radius: 12px; }
 .p-meta { display: flex; gap: 8px; margin-bottom: 20px; }
@@ -167,38 +181,45 @@ header {
   font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 6px 12px;
   background: var(--bg); border-radius: 4px; color: var(--text-light); border: 1px solid var(--border);
 }
-.p-badge-acc { background: rgba(184,134,11,0.1); color: var(--accent); border: none; }
-.project-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+.p-badge-acc { background: rgba(52,152,219,0.1); color: var(--secondary); border: none; }
+.project-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
 
 /* ─── ABOUT STRIP ─── */
 .about-box { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-start; }
 .a-feature { display: flex; gap: 24px; margin-bottom: 32px; }
 .af-icon { 
-  width: 56px; height: 56px; background: var(--primary); border-radius: 12px;
-  display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--white);
-  flex-shrink: 0; box-shadow: 0 4px 10px rgba(10,50,33,0.2);
+  width: 56px; height: 56px; background: var(--bg); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--primary);
+  flex-shrink: 0; border: 1px solid var(--border);
 }
 .af-text h4 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
 .af-text p { font-size: 14px; color: var(--text-light); }
 
-/* ─── MOBILE ─── */
-@media (max-width: 1024px) {
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1100px) {
   .hero-grid { grid-template-columns: 1fr; text-align: center; }
   .hero-content { display: flex; flex-direction: column; align-items: center; }
   .hero-visual { display: none; }
   .about-box { grid-template-columns: 1fr; gap: 40px; }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .h-stats-float { position: relative; left: 0; bottom: 0; flex-direction: row; flex-wrap: wrap; justify-content: center; margin-top: 40px; box-shadow: none; border: 1px solid var(--border); }
+  .h-stat { border-bottom: none; border-right: 1px solid var(--border); padding: 0 20px; }
 }
 
 @media (max-width: 768px) {
-  header { height: 70px; }
-  .nav-links { display: none; } /* Simplified for now */
-  .menu-toggle { display: block; }
-  .hero h1 { font-size: 60px; }
+  header { height: 72px; }
+  .nav-links { display: none; }
+  .menu-toggle { display: flex; }
+  .hero h1 { font-size: 54px; }
+  .hero p { font-size: 16px; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .section { padding: 60px 0; }
   .cta-btn { display: none; }
-  .nav-r { gap: 10px; }
+  .nav-r { gap: 12px; }
+  .h-stats-float { flex-direction: column; width: 100%; }
+  .h-stat { border-right: none; border-bottom: 1px solid var(--border); padding: 10px 0; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .card { padding: 30px; }
 }
 
 /* ─── FOOTER ─── */
@@ -222,7 +243,7 @@ input, textarea, select {
   width: 100%; padding: 16px; border: 1px solid var(--border); border-radius: 8px;
   background: var(--white); font-family: inherit; font-size: 15px; outline: none; transition: var(--transition);
 }
-input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(10,50,33,0.05); }
+input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.05); }
 </style>
 </head>
 <body>
@@ -240,10 +261,14 @@ input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4p
         <button class="lb" onclick="setLang('en')">EN</button>
       </div>
       <button class="btn btn-primary cta-btn" style="padding: 10px 20px; font-size: 12px;" onclick="goto('contact')" id="h-cta">Консультация</button>
-      <button class="menu-toggle">☰</button>
+      <button class="menu-toggle" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </header>
+
+<div class="mobile-nav" id="mobile-nav"></div>
 
 <main>
   <div class="page act" id="p-home"></div>
@@ -289,7 +314,7 @@ ru:{
     aBtn:'О компании',
     ac:[{ic:'🛡️',h:'Независимость',p:'Мы не аффилированы с поставщиками оборудования.'},{ic:'🧪',h:'R&D Лаборатория',p:'Собственный комплекс для реологических испытаний.'},{ic:'🇰🇿',h:'КЗ Содержание',p:'100% казахстанская компания и штат.'}],
     sLbl:'Услуги',sTitle:'Основные направления',
-    sv:[{n:'01',h:'Пульпопроводы',p:'Проектирование магистральных систем транспортировки концентратов.'},{n:'02',h:'Хвостовое хозяйство',p:'Системы сгущения, фильтрации и складирования отходов.'},{n:'03',h:'Закладка шахт',p:'Разработка гидравлических и пастовых закладочных комплексов.'},{n:'04',h:'Обогащение',p:'Оптимизация технологических схем переработки ресурсов.'},{n:'05',h:'Водопользование',p:'Водоотлив, баланс вод и очистные сооружения.'},{n:'06',h:'Полевой сервис',p:'Аудит, модернизация и ретрофит действующих объектов.'}],
+    sv:[{n:'01',h:'Пульпопроводы',p:'Проектирование магистральных систем транспортировки концентратов.'},{n:'02',h:'Хвостовое хозяйство',p:'Системы сгущения, фильтрации и складирования отходов.'},{n:'03',h:'Закладка шахт',p:'Разработка гидравлических и пастовых закладочных комплексов.'},{n:'04',h:'Обогащение',p:'Оптимизация технологических схем переработки ресурсов.'},{n:'05',h:'Водопользование',p:'Водоотлив, баланс вод и очистка шахтных вод.'},{n:'06',h:'Полевой сервис',p:'Аудит, модернизация и ретрофит действующих объектов.'}],
     pLbl:'Проекты',pTitle:'Наш опыт',
     pj:[{t:'Pipeline',r:'ВКО',h:'Риддерский Концентрат',p:'Оптимизация магистрального трубопровода 74 км для Казцинк.'},{t:'Tailings',r:'Караганда',h:'Саранское Хвостохранилище',p:'Проектирование системы транспорта 45к т/сут для Казахмыс.'},{t:'Backfill',r:'Жезказган',h:'Рудник Нурказган',p:'Внедрение системы пастовой закладки выработанного пространства.'},{t:'Water',r:'Павлодар',h:'Алюминий Казахстана',p:'Модернизация системы оборотного водоснабжения завода.'}],
     pBtn:'Смотреть все проекты'
@@ -297,7 +322,7 @@ ru:{
   about:{lbl:'О компании',h:'Лидеры Инжиниринга',intro:'Tynys-Holding — ведущая независимая компания, предоставляющая специализированные инженерные услуги для горно-металлургического сектора Казахстана.',stats:[{n:'2009',l:'Основание'},{n:'45+',l:'Экспертов'},{n:'14',l:'Регионов'}],labH:'Исследовательский Центр',labP:'Наша лаборатория позволяет проводить глубокие исследования физико-механических свойств пульп, что обеспечивает высочайшую точность проектных решений.'},
   projects:{lbl:'Проекты',h:'Наши Реализации',sub:'Мы успешно завершили более 80 проектов по всему Казахстану.',items:[{t:'Pipeline',r:'ВКО',h:'Риддерский Концентрат',p:'Оптимизация трубопровода 74 км.'},{t:'Tailings',r:'Караганда',h:'Саранское Хвостохранилище',p:'Проектирование системы транспорта.'},{t:'Backfill',r:'Жезказган',h:'Рудник Нурказган',p:'Система пастовой закладки.'},{t:'Processing',r:'Акмолинская обл.',h:'Васильковский ГОК',p:'Аудит схемы измельчения.'}]},
   team:{lbl:'Команда',h:'Наши Эксперты',sub:'Коллектив профессионалов с международным опытом.',members:[{n:'Асель Алимова',r:'Генеральный Директор',p:'20+ лет опыта в управлении инжиниринговыми проектами.'},{n:'Бауыржан Сапаров',r:'Главный Инженер',p:'Эксперт в области гидротранспорта и хвостового хозяйства.'},{n:'Елена Ким',r:'Руководитель Лаборатории',p:'Кандидат наук, специалист по реологии пульп.'},{n:'Дмитрий Петров',r:'Ведущий Проектировщик',p:'Разработчик уникальных систем закладочных комплексов.'}]},
-  news:{lbl:'Новости',h:'События и Инсайты',sub:'Актуальная информация о жизни компании.',items:[{d:'15.05.2024',h:'Завершен проект FEED для Казцинк',p:'Успешно сдана документация по модернизации трубопровода.'},{d:'02.04.2024',h:'Участие в Mining Week 2024',p:'Наши эксперты выступили с докладом о пастовом сгущении.'},{d:'20.01.2024',h:'Новое оборудование в R&D',p:'Закуплен современный реометр Anton Paar для точных тестов.'}]},
+  news:{lbl:'Новости',h:'События и Инсайты',sub:'Актуальная информация о жизни компании.',items:[{d:'15.05.2024',h:'Завершен проект FEED для Казцинк',p:'Успешно сдана документация по модернизации трубопровода.'},{d:'02.04.2024',h:'Mining Week 2024',p:'Наши эксперты выступили с докладом о пастовом сгущении.'},{d:'20.01.2024',h:'Новое оборудование в R&D',p:'Закуплен современный реометр Anton Paar для точных тестов.'}]},
   contact:{lbl:'Контакты',h:'Обсудим ваш проект',sub:'Свяжитесь с нами для получения консультации.',fName:'Имя Фамилия',fEmail:'Ваш Email',fMsg:'Описание задачи',fBtn:'Отправить запрос',addr:'Алматы, пр. Достык 180, БЦ «Нурлы Тау»',ph:'+7 (727) 350-00-00',em:'info@tynys-holding.kz',ok:'Заявка принята!'}
 },
 kk:{
@@ -323,7 +348,7 @@ kk:{
   projects:{lbl:'Жобалар',h:'Біздің Жұмыстар',sub:'Біз Қазақстан бойынша 80-нен астам жобаны сәтті аяқтадық.',items:[{t:'Pipeline',r:'ШҚО',h:'Риддер Концентраты',p:'74 км құбырды оңтайландыру.'},{t:'Tailings',r:'Қарағанды',h:'Сарань Хвост Қоймасы',p:'Тасымалдау жүйесін жобалау.'},{t:'Backfill',r:'Жезқазған',h:'Нұрқазған кеніші',p:'Паста толтыру жүйесі.'},{t:'Processing',r:'Ақмола обл.',h:'Васильков КБК',p:'Ұсақтау схемасының аудиті.'}]},
   team:{lbl:'Команда',h:'Біздің Сарапшылар',sub:'Халықаралық тәжірибесі бар кәсіби мамандар ұжымы.',members:[{n:'Әсел Әлімова',r:'Бас Директор',p:'Инженерлік жобаларды басқаруда 20 жылдан астам тәжірибе.'},{n:'Бауыржан Сапаров',r:'Бас Инженер',p:'Гидротранспорт және хвост шаруашылығы саласындағы сарапшы.'},{n:'Елена Ким',r:'Зертхана Жетекшісі',p:'Ғылым кандидаты, пульпа реологиясы бойынша маман.'},{n:'Дмитрий Петров',r:'Жетекші Жобалаушы',p:'Толтыру кешендерінің бірегей жүйелерін әзірлеуші.'}]},
   news:{lbl:'Жаңалықтар',h:'Оқиғалар мен Жаңалықтар',sub:'Компания өмірі туралы өзекті ақпарат.',items:[{d:'15.05.2024',h:'Казцинк үшін FEED жобасы аяқталды',p:'Құбырды жаңғырту бойынша құжаттама сәтті тапсырылды.'},{d:'02.04.2024',h:'Mining Week 2024 қатысу',p:'Біздің сарапшылар пасталы қоюландыру туралы баяндама жасады.'},{d:'20.01.2024',h:'R&D-да жаңа жабдық',p:'Нақты сынақтар үшін заманауи Anton Paar реометрі сатып алынды.'}]},
-  contact:{lbl:'Байланыс',h:'Жобаңызды талқылайық',sub:'Кеңес алу үшін бізге хабарласыңыз.',fName:'Аты-жөніңіз',fEmail:'Email',fMsg:'Тапсырма сипаттамасы',fBtn:'Сұраныс жіберу',addr:'Алматы қ., Достық д-лы 180, «Нұрлы Тау» БО',ph:'+7 (727) 350-00-00',em:'info@tynys-holding.kz',ok:'Өтініш қабылданды!'}
+  contact:{lbl:'Байланыс',h:'Жобаңызды талқылайық',sub:'Кеңес алу үшін бізге хабарласыңыз.',fName:'Аты-жөніңіз',fEmail:'Email',fMsg:'Тапсырма сипаттамасы',fBtn:'Сұраныс жіберу',addr:'Алматы қ., Достық д-лы 180, «Нұрлы Тау» БО',ph:'+7 (727) 350-00-00',em:'info@tynys-holding.kz',ok:'Өтініш сәтті жіберілді!'}
 },
 en:{
   nav:{home:'Home',about:'About',services:'Services',projects:'Projects',team:'Team',news:'News',career:'Careers',contact:'Contact',cta:'Consultation',copy:'© 2024 Tynys-Holding · Republic of Kazakhstan',addr:'Almaty, Kazakhstan'},
@@ -348,7 +373,7 @@ en:{
   projects:{lbl:'Projects',h:'Our Implementations',sub:'We have successfully completed over 80 projects across Kazakhstan.',items:[{t:'Pipeline',r:'East KZ',h:'Ridder Concentrate',p:'74km pipeline optimization.'},{t:'Tailings',r:'Karaganda',h:'Saran Tailings',p:'Transport system design.'},{t:'Backfill',r:'Zhezkazgan',h:'Nurkazgan Mine',p:'Paste backfill system.'},{t:'Processing',r:'Akmola Reg.',h:'Vasilkovskoye Mine',p:'Flowsheet audit.'}]},
   team:{lbl:'Team',h:'Our Experts',sub:'A team of professionals with international experience.',members:[{n:'Asel Alimova',r:'General Director',p:'20+ years of experience in engineering project management.'},{n:'Bauyrzhan Saparov',r:'Chief Engineer',p:'Expert in hydro-transport and tailings management.'},{n:'Elena Kim',r:'Laboratory Head',p:'PhD, specialist in slurry rheology.'},{n:'Dmitry Petrov',r:'Lead Designer',p:'Developer of unique mine backfill systems.'}]},
   news:{lbl:'News',h:'Events & Insights',sub:'Latest information about company updates.',items:[{d:'15.05.2024',h:'FEED Project for Kazzinc Finished',p:'Pipeline modernization documentation successfully delivered.'},{d:'02.04.2024',h:'Mining Week 2024 Participation',p:'Our experts presented a paper on paste thickening.'},{d:'20.01.2024',h:'New Equipment in R&D',p:'Advanced Anton Paar rheometer acquired for precise tests.'}]},
-  contact:{lbl:'Contact',h:'Let\'s Talk',sub:'Contact us for technical consultation.',fName:'Full Name',fEmail:'Your Email',fMsg:'Description',fBtn:'Send Enquiry',addr:'180 Dostyk Ave, Nurly Tau BC, Almaty',ph:'+7 (727) 350-00-00',em:'info@tynys-holding.kz',ok:'Enquiry sent!'}
+  contact:{lbl:'Contact',h:'Let\'s Talk',sub:'Our team is ready to assist with your technical enquiries.',fName:'Full Name',fEmail:'Your Email',fMsg:'Project Description',fBtn:'Send Enquiry',addr:'180 Dostyk Ave, Nurly Tau BC, Almaty',ph:'+7 (727) 350-00-00',em:'info@tynys-holding.kz',ok:'Enquiry sent!'}
 }
 };
 
@@ -365,6 +390,7 @@ function setLang(l){
 }
 
 function goto(p){
+  closeMenu();
   document.querySelectorAll('.page').forEach(e=>e.classList.remove('act'));
   setTimeout(()=>{
     const el=document.getElementById('p-'+p);
@@ -373,10 +399,23 @@ function goto(p){
   }, 100);
 }
 
+function toggleMenu(){
+  const btn = document.querySelector('.menu-toggle');
+  const nav = document.getElementById('mobile-nav');
+  btn.classList.toggle('open');
+  nav.classList.toggle('open');
+}
+
+function closeMenu(){
+  document.querySelector('.menu-toggle').classList.remove('open');
+  document.getElementById('mobile-nav').classList.remove('open');
+}
+
 function renderNav(){
   const n=D[lang].nav;
   const html=PAGES.map(p=>`<button class="${curPage===p?'act':''}" onclick="goto('${p}')">${n[p]}</button>`).join('');
   document.getElementById('nav-links').innerHTML=html;
+  document.getElementById('mobile-nav').innerHTML=html;
   document.getElementById('f-links').innerHTML=PAGES.map(p=>`<li><a onclick="goto('${p}')">${n[p]}</a></li>`).join('');
 }
 
@@ -578,7 +617,7 @@ function renderAbout(el){
       ${d.stats.map(s=>`<div class="card" style="text-align:center; padding:30px;"><div class="h-stat-n">${s.n}</div><div class="h-stat-l">${s.l}</div></div>`).join('')}
     </div>
     <div class="card" style="background:var(--primary); color:var(--white);">
-      <h3 class="s-title" style="color:var(--accent); font-size:32px;">${d.labH}</h3>
+      <h3 class="s-title" style="color:var(--secondary); font-size:32px;">${d.labH}</h3>
       <p style="opacity:0.9; font-size:18px;">${d.labP}</p>
     </div>
   </div>
