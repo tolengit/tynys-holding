@@ -208,14 +208,16 @@ header {
 
 @media (max-width: 768px) {
   header { height: 72px; }
+  .header-inner { flex-direction: row-reverse; } /* Swap Logo (right) and Toggle/Actions (left) */
+  .logo img { height: 50px; } /* Increased logo size */
   .nav-links { display: none; }
-  .menu-toggle { display: flex; }
+  .menu-toggle { display: flex; order: 1; }
+  .nav-r { order: 2; gap: 12px; }
   .hero h1 { font-size: 54px; }
   .hero p { font-size: 16px; }
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .section { padding: 60px 0; }
   .cta-btn { display: none; }
-  .nav-r { gap: 12px; }
   .h-stats-float { flex-direction: column; width: 100%; }
   .h-stat { border-right: none; border-bottom: 1px solid var(--border); padding: 10px 0; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
