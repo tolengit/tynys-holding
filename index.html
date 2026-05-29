@@ -7,22 +7,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-/* ─── PROFESSIONAL MINERAL PALETTE ─── */
+/* ─── BRAND COLORS ─── */
 :root {
-  --primary: #0A3221;    /* Deep Malachite Green */
-  --primary-l: #154D38;
-  --accent: #B8860B;     /* Industrial Gold/Bronze */
-  --secondary: #111827;  /* Dark Slate */
-  --bg: #FCFAF7;         /* Warm Chalk White */
+  --primary: #2ECC71;    /* Light Green from Logo */
+  --primary-d: #27AE60;
+  --secondary: #3498DB;  /* Bright Blue from Logo */
+  --accent: #1F4E79;     /* Deep Blue for contrast */
+  --bg: #F8F9FA;         /* Clean Light Grey */
   --card-bg: #FFFFFF;
-  --border: #E5E7EB;
-  --text: #1F2937;
-  --text-light: #6B7280;
+  --border: #E9ECEF;
+  --text: #2C3E50;
+  --text-light: #7F8C8D;
   --white: #FFFFFF;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
-  --container: 1280px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow: 0 4px 6px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  --container: 1200px;
+  --transition: all 0.3s ease;
 }
 
 /* ─── BASE STYLES ─── */
@@ -235,8 +235,8 @@ input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4p
     <nav class="nav-links" id="nav-links"></nav>
     <div class="nav-r">
       <div class="lang-switch">
-        <button class="lb act" onclick="setLang('ru')">RU</button>
-        <button class="lb" onclick="setLang('kk')">KK</button>
+        <button class="lb act" onclick="setLang('kk')">KK</button>
+        <button class="lb" onclick="setLang('ru')">RU</button>
         <button class="lb" onclick="setLang('en')">EN</button>
       </div>
       <button class="btn btn-primary cta-btn" style="padding: 10px 20px; font-size: 12px;" onclick="goto('contact')" id="h-cta">Консультация</button>
@@ -488,7 +488,7 @@ function renderContact(el){
 }
 
 // INITIALIZE
-setLang('ru');
+setLang('kk');
 </script>
 </body>
 </html>
