@@ -88,7 +88,12 @@ header {
   min-height: 100vh; padding-top: 80px; display: flex; align-items: center;
   position: relative; overflow: hidden; background: #fff;
 }
-.hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 60px; }
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1579362391583-f3680962779a?auto=format&fit=crop&q=80&w=2000');
+  background-size: cover; background-position: center; opacity: 0.15; z-index: 1;
+}
+.hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 60px; position: relative; z-index: 2; }
 .hero-content { position: relative; z-index: 2; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 800;
@@ -116,10 +121,8 @@ header {
   width: 100%; height: 100%; background: var(--bg); border-radius: 20px;
   position: relative; overflow: hidden; box-shadow: var(--shadow-lg);
   border: 1px solid var(--border);
-}
-.hero-img-box::after {
-  content: 'TYNYS'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue'; font-size: 120px; color: rgba(46, 204, 113, 0.03); letter-spacing: 10px;
+  background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1200');
+  background-size: cover; background-position: center;
 }
 .h-stats-float {
   position: absolute; left: -40px; bottom: 40px; background: var(--white);
@@ -618,9 +621,12 @@ function renderAbout(el){
     <div class="grid-3" style="margin-bottom:80px">
       ${d.stats.map(s=>`<div class="card" style="text-align:center; padding:30px;"><div class="h-stat-n">${s.n}</div><div class="h-stat-l">${s.l}</div></div>`).join('')}
     </div>
-    <div class="card" style="background:var(--primary); color:var(--white);">
-      <h3 class="s-title" style="color:var(--secondary); font-size:32px;">${d.labH}</h3>
-      <p style="opacity:0.9; font-size:18px;">${d.labP}</p>
+    <div class="card" style="background:var(--primary); color:var(--white); position:relative; overflow:hidden;">
+      <div style="position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1200'); background-size:cover; background-position:center; opacity:0.1;"></div>
+      <div style="position:relative; z-index:2;">
+        <h3 class="s-title" style="color:var(--secondary); font-size:32px;">${d.labH}</h3>
+        <p style="opacity:0.9; font-size:18px;">${d.labP}</p>
+      </div>
     </div>
   </div>
 </div>`;
